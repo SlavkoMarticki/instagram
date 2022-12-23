@@ -1,0 +1,42 @@
+.createacc-container{
+    background-color: #fafafa;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+}
+.createacc-container .createacc-box{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top: 30px;
+}
+.createacc-container .createacc-box .createacc-title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+.createacc-container .createacc-box .createacc-desc{
+    color: #b3b3b3;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.createacc-container .createacc-box .createacc-policy-desc{
+    font-size: 12px;
+}
+
+@media only screen and (min-width: 500px) {
+    .createacc-container .createacc-box{
+        width: 60%;
+    }
+}
+@media only screen and (min-width: 850px) {
+    .createacc-container .createacc-box{
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .createacc-container .createacc-box{
+        width: 30%;
+    }
+}
