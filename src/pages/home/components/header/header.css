@@ -1,0 +1,41 @@
+.container{
+    border: 1px solid black;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    height: 7%;
+}
+.container .title{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+}
+.container .title h1{
+    margin: 5px 0px 0px 0px;
+    font-size: 27px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container .button-holder{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50%;
+    height: 100%;
+    text-align: right;
+}
+.button-images{
+    margin: 3px 3px 0px 0px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.button-images img{
+    height: 30px;
+    width: 30px;
+}
+
+

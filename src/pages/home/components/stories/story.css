@@ -1,0 +1,23 @@
+.home-container{
+    border-bottom: 1px solid rgb(209, 209, 209);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 45px;
+    height: 90px;
+    overflow-x: hidden;
+}
+.home-container .storie-button{
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    padding: 0px;
+    margin: 5px ;
+}
+.home-container .storie-button img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 0px;
+    margin: 0px;
+}

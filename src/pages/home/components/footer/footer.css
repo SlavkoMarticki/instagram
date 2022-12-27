@@ -1,0 +1,28 @@
+.create-accout-footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid rgb(209, 209, 209);
+    height: 40px;
+}
+.create-accout-footer button{
+    width: 50px;
+    height: 100%;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.create-accout-footer button img{
+    height: 100%;
+    width: 100%;
+    
+}
+.create-accout-footer .userPic {
+    float: right;
+    margin: 0px;
+    padding: 0px;
+ }
+.create-accout-footer .userPic img{
+   border-radius: 50%;
+}
