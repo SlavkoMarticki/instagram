@@ -49,3 +49,31 @@
     width: 25px;
     height: 25px;
 }
+@media screen and (min-width: 500px){
+    .postedImage-container{
+        position: absolute;
+        left: 15%;
+        right: 15%;
+    }
+}
+@media screen and (min-width: 800px){
+    .postedImage-container{
+        position: absolute;
+        left: 20%;
+        right: 20%;
+    }
+}
+@media screen and (min-width: 1000px){
+    .postedImage-container{
+        position: absolute;
+        left: 25%;
+        right: 25%;
+    }
+}
+@media screen and (min-width: 1400px){
+    .postedImage-container{
+        position: absolute;
+        left: 35%;
+        right: 35%;
+    }
+}

@@ -1,0 +1,11 @@
+.copyright{
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    text-align: center;
+}
+.copyright p{
+    color: rgb(154, 154, 154);
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../../common/buttons/Button";
 import Input from "../../../../common/inputs/Input";
-import Footer from "../../../../common/footer/Footer";
+import CopyRight from "../../../../common/copy-right/CopyRight";
 import "./createAccountStructure.css";
 
 export default function CreateAccountStructure(){
@@ -36,7 +36,7 @@ export default function CreateAccountStructure(){
                 <Button 
                     content = "Sign Up"
                 />
-                <Footer />
+                <CopyRight />
             </div>
         </div>
     );

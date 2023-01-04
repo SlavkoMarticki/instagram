@@ -1,5 +1,4 @@
 .container{
-    border: 1px solid black;
     position: absolute;
     top: 0px;
     right: 0px;
@@ -36,6 +35,35 @@
 .button-images img{
     height: 30px;
     width: 30px;
+}
+
+@media screen and (min-width: 500px){
+    .container{
+        position: absolute;
+        left: 15%;
+        right: 15%;
+    }
+}
+@media screen and (min-width: 800px){
+    .container{
+        position: absolute;
+        left: 20%;
+        right: 20%;
+    }
+}
+@media screen and (min-width: 1000px){
+    .container{
+        position: absolute;
+        left: 25%;
+        right: 25%;
+    }
+}
+@media screen and (min-width: 1400px){
+    .container{
+        position: absolute;
+        left: 35%;
+        right: 35%;
+    }
 }
 
 

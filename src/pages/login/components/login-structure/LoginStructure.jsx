@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../../common/buttons/Button";
 import Input from "../../../../common/inputs/Input";
-import Footer from "../../../../common/footer/Footer";
+import CopyRight from "../../../../common/copy-right/CopyRight";
 import "./loginStructure.css";
 
 export default function LoginStructure(){
@@ -29,7 +29,7 @@ export default function LoginStructure(){
                 <Button 
                     content = "Log in"
                 />
-                <Footer />
+                <CopyRight />
             </div>
         </div>
     );
