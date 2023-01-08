@@ -7,3 +7,16 @@
     font-weight: bold;
     font-size: 20px;
 }
+.user-profile-header .add-image-button {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    background-color: #fafafa;
+    border: none;
+    cursor: pointer;
+}
+
+.user-profile-header .add-image-button img{
+    width: 30px;
+    height: 30px;
+}

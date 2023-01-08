@@ -3,9 +3,13 @@ import "./button.css";
 
 export default function Button(props){
 
-    const {content} = props;
+    const {content, click} = props;
+
 
     return (
-        <button className="button"> {content} </button>
+        <button 
+            className="button"
+            onClick={() => {click(true)}}
+        > {content} </button>
     );
 }

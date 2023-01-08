@@ -1,128 +1,22 @@
 import React from "react";
 import "./userPicture.css";
-import image from "../../../home/components/stories/img/img-test.jpg";
-export default function UserPicture(){
+
+
+export default function UserPicture(props){
+
+    const {urls} = props;
+    
     return (
         <div className="user-picture-container">
-            <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-                <img 
-                src={image} 
-                alt="Loading..." 
-                className="user-picture"
-            />
-       
-                
+            {urls?.map((url) => {
+               return <img 
+                    src={url} 
+                    alt="Loading..." 
+                    className="user-picture"
+                />
+            })
+            }
             
-      
         </div>
     );
 }

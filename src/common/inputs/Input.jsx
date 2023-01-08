@@ -6,7 +6,8 @@ export default function Input(props){
     
     const {
         placeholder,
-        type
+        type,
+        inputValue
     } = props;
 
     return (
@@ -14,6 +15,7 @@ export default function Input(props){
             className="input"
             placeholder={placeholder}
             type={type}
+            onChange={e => {inputValue(e.target.value)}}
         />
     );
 }

@@ -2,7 +2,13 @@ import React from "react";
 import "./userMainInfo.css";
 import img from "../../../home/components/stories/img/img-test.jpg";
 
-export default function UserMainInfo(){
+export default function UserMainInfo(props){
+
+    const {
+        following, 
+        followers,
+        images
+    } = props;
 
     return (
         <div className="user-main-info-container">
@@ -16,9 +22,9 @@ export default function UserMainInfo(){
                     <p>Following</p>
                 </div>
                 <div className="post-followers-numbers">
-                    <p>23</p>
-                    <p>311</p>
-                    <p>350</p>
+                    <p>{images?.length}</p>
+                    <p>{following?.length}</p>
+                    <p>{followers?.length}</p>
                 </div>
            </div>
         </div>
