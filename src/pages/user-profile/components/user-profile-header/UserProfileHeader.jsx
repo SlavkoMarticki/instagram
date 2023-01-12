@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserProfileHeader(props){
     const navigate = useNavigate();
-    const {name} = props;
+    const {name, addImage} = props;
 
     return (
         <div className="user-profile-header">
             <p className="user-name">{name}</p>
-            <button 
+         {  addImage != true ? <button 
                 className="add-image-button"
                 onClick={() => {navigate("/addimage")}}
                 >
@@ -19,7 +19,7 @@ export default function UserProfileHeader(props){
                     src={img} 
                     alt="Loading..." 
                 />
-            </button>
+            </button> : <></>}
         </div>
     );
 }

@@ -18,10 +18,12 @@ export default function UserProfile(){
     const [imagerUrl, setImageUrl] = useState([]);
     const userCollectionData = collection(db, "users");
     const imageRef = ref(storage, "/");
-    const state = store.getState();
+    const [state, setState] = useState([]);
     console.log(state[0]);
 
     useEffect(() => {
+        
+        setState(store.getState());
         listAll(imageRef).then((res) => {
             res.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {

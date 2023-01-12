@@ -16,6 +16,10 @@ export default function AddImage(){
         const imageRef = ref(storage, state[1]?.email +"/"+ image.name);
         uploadBytes(imageRef, image).then(() => {
             alert ("Image Uploaded");
+            navigate("/home");
+            store.dispatch({
+                type: "getUser"
+            });
         })
     }
 

@@ -17,6 +17,7 @@ const user = [];
 const dataRef = collection(db, "users");
 
 const reducer = (state = user, action) => {
+    //user.push([]);
     if(action.type === "getUser"){
         const q = query(dataRef, where("email", "==", action.email));
         const imageRef = ref(storage, action.email);
@@ -33,12 +34,12 @@ const reducer = (state = user, action) => {
         listAll(imageRef).then((res) => {
             res.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {
-                   // setImageUrl((prev) => [...prev, url]);
-                   
+                  
                    imgData.push(url);
                    
                 })
             })
+            console.log(imgData);
             user.push(imgData);
         })
     }

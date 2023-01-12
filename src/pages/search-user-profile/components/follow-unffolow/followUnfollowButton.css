@@ -1,0 +1,15 @@
+.follunfoll-button-holder{
+    margin-top: 15px;
+}
+.follunfoll-button-holder button{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    margin-left: 7px;
+    margin-top: 5px;
+    width: 80px;
+    height: 35px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}

@@ -13,7 +13,7 @@ export default function Footer(){
             <button onClick={() => {navigate("/home")}}>
                 <img src={home} alt="" />
             </button>
-            <button >
+            <button onClick={() => {navigate("/search")}}>
                 <img src={search} alt="" />
             </button>
             <button className="userPic" onClick={() => {navigate("/userprofile")}}>
