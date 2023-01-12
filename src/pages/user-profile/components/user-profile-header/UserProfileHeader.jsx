@@ -1,7 +1,8 @@
 import React from "react";
 import "./userProfileHeader.css";
 import "../../../../common/body/body.css";
-import img from "../../../../common/images/plus.png";
+import addImg from "../../../../common/images/plus.png";
+import goBack from "../../../../common/images/arrow.png"
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfileHeader(props){
@@ -16,10 +17,13 @@ export default function UserProfileHeader(props){
                 onClick={() => {navigate("/addimage")}}
                 >
                 <img 
-                    src={img} 
+                    src={addImg} 
                     alt="Loading..." 
                 />
-            </button> : <></>}
+            </button> :  <button className="add-image-button" onClick={() => {navigate("/search")}}>
+                <img src={goBack} alt="Loading" />
+            </button>}
+    
         </div>
     );
 }

@@ -5,6 +5,7 @@ import searchImg from "../../common/images/search.png";
 import { useNavigate } from "react-router-dom";
 import image from "../home/components/stories/img/img-test.jpg"
 import { db } from "../../firebase/firebase-config";
+import store from "../../store/store";
 import {
     query,
     where,
@@ -30,10 +31,19 @@ export default function Search(){
         onSnapshot(q, (snapshot) => {
             snapshot.docs.map((doc) => {
                 setUser([{...doc.data()}]);
-                console.log(user);
+               
             })
-
+            console.log(user);
         });
+    }
+    
+    const seeSearchUserData = () => {
+        
+        store.dispatch({
+            type: "searchUser",
+            userName: userInput
+        })
+        navigate("/searchuserprofile");
     }
 
     return (
@@ -48,7 +58,10 @@ export default function Search(){
                     <button onClick={() => {searchUser()}}>
                         <img src={searchImg} alt="Loading..." />
                     </button>
-                    <button onClick={() => {navigate("/home")}}>
+                    <button onClick={() => {
+                        
+                            navigate("/home")}
+                        }>
                         <img src={arrow} alt="Loading..." />
                     </button>
                 </div>
@@ -58,7 +71,7 @@ export default function Search(){
                 {user.map((e) => {
                         return (
                         <div className="result">
-                            <button onClick={() => {navigate("/searchuserprofile")}}>
+                            <button onClick={() => {seeSearchUserData();}}>
                                 <img src={image} alt="" />
                             </button>
                             <p>{e.user_name}</p>

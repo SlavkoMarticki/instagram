@@ -13,7 +13,18 @@ import {
 } from "firebase/storage";
 
 
-const user = [];
+const user = {
+    loginUser: {
+        data: {},
+        images: {}
+    },
+    searchUser: {
+        data: {},
+        images: {}
+    },
+    searchUserName: ""
+};
+
 const dataRef = collection(db, "users");
 
 const reducer = (state = user, action) => {
@@ -26,9 +37,8 @@ const reducer = (state = user, action) => {
         onSnapshot(q, (snapshot) => {
            
             snapshot.docs.map((doc) => {
-                user.push(
-                    {...doc.data()}
-                )
+                user.loginUser.data = doc.data()
+                
             });
         });
         listAll(imageRef).then((res) => {
@@ -39,11 +49,29 @@ const reducer = (state = user, action) => {
                    
                 })
             })
-            console.log(imgData);
-            user.push(imgData);
+            //console.log(imgData);
+            user.loginUser.images = imgData;
         })
+        console.log(user);
+    }
+
+    if(action.type === "searchUser"){
+        user.searchUserName = action.userName
+        const getEmail = query(dataRef, where("user_name", "==",  user.searchUserName));
+        console.log(getEmail);
+        let email = "";
+
+        onSnapshot(getEmail, (snapshot) => {
+            snapshot.docs.map((doc) => {
+                email = doc.data().email;
+                user.searchUser.data = doc.data();
+            })
+            console.log(user.searchUser);
+        });
     }
 
     return state;
 }
+
+
 export default reducer;

@@ -18,12 +18,11 @@ export default function UserProfile(){
     const [imagerUrl, setImageUrl] = useState([]);
     const userCollectionData = collection(db, "users");
     const imageRef = ref(storage, "/");
-    const [state, setState] = useState([]);
-    console.log(state[0]);
+    const [state, setState] = useState({});
+    const getCuresntState = store.getState();
+
 
     useEffect(() => {
-        
-        setState(store.getState());
         listAll(imageRef).then((res) => {
             res.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {
@@ -31,29 +30,23 @@ export default function UserProfile(){
                 })
             })
         });
-
-        const getData = async () => {
-            const data = await getDocs(userCollectionData);
-            setUserData(data.docs.map((doc) => (
-                {...doc.data()}
-            )))
-        }
-
-        getData();
+       
     }, [])
 
     return(
         <>
             <UserProfileHeader 
-                name = {state[1]?.user_name}    
+                name = {
+                    getCuresntState.loginUser.data.user_name
+                }    
              />
             <UserMainInfo 
-                followers = {state[1]?.followers}
-                following = {state[1]?.following}
-                images = {state[0]}
+                followers = {getCuresntState.loginUser.data.followers}
+                following = {getCuresntState.loginUser.data.following}
+                images = {getCuresntState.loginUser.images}
             />
             <UserPicture 
-                urls={state[0]}
+                urls={getCuresntState.loginUser.images}
             />
             
             <Footer />
