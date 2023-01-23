@@ -14,7 +14,7 @@ import UserPicture from "./components/user-pictures/UserPicture";
 
 
 export default function UserProfile(){
-    const [userData, setUserData] = useState([]);
+    
     const [imagerUrl, setImageUrl] = useState([]);
     const userCollectionData = collection(db, "users");
     const imageRef = ref(storage, "/");
@@ -23,6 +23,7 @@ export default function UserProfile(){
 
 
     useEffect(() => {
+        console.log(getCuresntState);
         listAll(imageRef).then((res) => {
             res.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {

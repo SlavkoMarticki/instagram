@@ -13,7 +13,8 @@ export default function AddImage(){
 
     const uploadImage = () => {
         if(image == null) return;
-        const imageRef = ref(storage, state[1]?.email +"/"+ image.name);
+        console.log(state.loginUser);
+        const imageRef = ref(storage, state.loginUser.data.email +"/"+ image.name);
         uploadBytes(imageRef, image).then(() => {
             alert ("Image Uploaded");
             navigate("/home");

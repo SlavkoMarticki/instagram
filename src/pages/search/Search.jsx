@@ -21,6 +21,7 @@ import {
 export default function Search(){
     const navigate = useNavigate();
     const [userInput, setUserInput] = useState("");
+    const [userEmail, setUserEmail] = useState("");
     const [user, setUser] = useState([]);
     //const user = []
     const ref = collection(db, "users");
@@ -30,20 +31,20 @@ export default function Search(){
         const q = query(ref, where("user_name", "==", userInput));
         onSnapshot(q, (snapshot) => {
             snapshot.docs.map((doc) => {
-                setUser([{...doc.data()}]);
-               
+                setUser([{...doc.data()}]);   
             })
-            console.log(user);
         });
     }
     
-    const seeSearchUserData = () => {
+    const seeSearchUserData = (user_name, email) => {
         
         store.dispatch({
             type: "searchUser",
-            userName: userInput
+            userName: user_name,
+            userEmail: email
         })
-        navigate("/searchuserprofile");
+        setTimeout(() => {navigate("/searchuserprofile");}, 3000)
+        
     }
 
     return (
@@ -69,9 +70,10 @@ export default function Search(){
             </div>
             <div className="search-result">
                 {user.map((e) => {
+                       
                         return (
                         <div className="result">
-                            <button onClick={() => {seeSearchUserData();}}>
+                            <button onClick={() => {seeSearchUserData(e.user_name, e.email);}}>
                                 <img src={image} alt="" />
                             </button>
                             <p>{e.user_name}</p>

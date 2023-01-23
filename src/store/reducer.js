@@ -4,7 +4,8 @@ import {
     where,
     collection,
     query,
-    onSnapshot
+    onSnapshot,
+    getDocs
  } from "firebase/firestore";
 import { 
     ref,
@@ -19,7 +20,12 @@ const user = {
         images: {}
     },
     searchUser: {
-        data: {},
+        data: {
+            email: "",
+            followers: [],
+            following: [],
+            user_name: ""
+        },
         images: {}
     },
     searchUserName: ""
@@ -52,26 +58,52 @@ const reducer = (state = user, action) => {
             //console.log(imgData);
             user.loginUser.images = imgData;
         })
-        console.log(user);
+        
     }
 
     if(action.type === "searchUser"){
         user.searchUserName = action.userName
-        const getEmail = query(dataRef, where("user_name", "==",  user.searchUserName));
-        console.log(getEmail);
-        let email = "";
+        console.log(action.userEmail);
 
-        onSnapshot(getEmail, (snapshot) => {
-            snapshot.docs.map((doc) => {
-                email = doc.data().email;
-                user.searchUser.data = doc.data();
+        const getUserData = () => {
+            const getData = query(dataRef, where("user_name", "==",  user.searchUserName));
+
+            onSnapshot(getData, (snapshot) => {
+                snapshot.docs.map((doc) => {
+                    //user.searchUser.data = doc.data();
+                    user.searchUser.data.email = doc.data().email;
+                    user.searchUser.data.user_name = doc.data().user_name;
+                    user.searchUser.data.following = doc.data().following;
+                    user.searchUser.data.followers = doc.data().followers;
+                })
+            }); 
+            console.log(user.searchUser.data.email);
+            return user.searchUser.data.email;
+        }
+        const getImages = () => {
+            
+           
+            const imageRef = ref(storage, action.userEmail);
+            const imgData = [];
+            
+            listAll(imageRef).then((res) => {
+            
+                res.items.forEach((item) => {
+                    getDownloadURL(item).then((url) => {
+                      
+                       imgData.push(url);
+                       
+                    });
+                })
+                console.log(user);
+                user.searchUser.images = imgData;
+
             })
-            console.log(user.searchUser);
-        });
+        }
+        getUserData();
+        getImages();
     }
 
     return state;
 }
-
-
 export default reducer;
