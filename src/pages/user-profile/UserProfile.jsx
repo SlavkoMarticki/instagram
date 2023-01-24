@@ -7,7 +7,7 @@ import UserProfileHeader from "./components/user-profile-header/UserProfileHeade
 import UserMainInfo from "./components/user-main-info/UserMainInfo";
 import { db, storage } from "../../firebase/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import { getDownloadURL, listAll, ref} from "firebase/storage";
+import { getDownloadURL, listAll, ref, getMetadata} from "firebase/storage";
 import store from "../../store/store";
 import UserPicture from "./components/user-pictures/UserPicture";
 
@@ -15,24 +15,23 @@ import UserPicture from "./components/user-pictures/UserPicture";
 
 export default function UserProfile(){
     
-    const [imagerUrl, setImageUrl] = useState([]);
-    const userCollectionData = collection(db, "users");
-    const imageRef = ref(storage, "/");
-    const [state, setState] = useState({});
+    //const [imagerUrl, setImageUrl] = useState([]);
+    //const userCollectionData = collection(db, "users");
+    //const imageRef = ref(storage, "/");
+    //const [state, setState] = useState({});
     const getCuresntState = store.getState();
 
 
-    useEffect(() => {
-        console.log(getCuresntState);
-        listAll(imageRef).then((res) => {
-            res.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageUrl((prev) => [...prev, url]);
-                })
-            })
-        });
+    // useEffect(() => {
+    //     // listAll(imageRef).then((res) => {
+    //     //     res.items.forEach((item) => {
+    //     //         getDownloadURL(item).then((url) => {
+    //     //             setImageUrl((prev) => [...prev, url]);
+    //     //         })
+    //     //     })
+    //     // });
        
-    }, [])
+    // }, [])
 
     return(
         <>

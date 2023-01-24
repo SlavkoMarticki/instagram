@@ -1,0 +1,23 @@
+.background-color{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: black;
+    text-align: center;
+}
+.background-color img{
+    width: 90%;
+    height: 70%;
+    background-size: cover;
+    margin-top: 30px;
+    background-size: cover;
+    border: 1px solid white;
+}
+.background-color .clicked-image-button{
+    display: inline-block;
+    width: 50%;
+    margin: 15px 0px 0px 0px;
+   
+}

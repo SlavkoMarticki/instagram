@@ -5,22 +5,29 @@ import {
     collection,
     query,
     onSnapshot,
-    getDocs
+    updateDoc,
+    doc,
+    arrayUnion
  } from "firebase/firestore";
 import { 
     ref,
     listAll,
-    getDownloadURL 
+    getDownloadURL,
+    deleteObject,
+    getStorage
 } from "firebase/storage";
 
 
 const user = {
     loginUser: {
-        data: {},
+        data: {
+            id: ""
+        },
         images: {}
     },
     searchUser: {
         data: {
+            id: "",
             email: "",
             followers: [],
             following: [],
@@ -44,6 +51,7 @@ const reducer = (state = user, action) => {
            
             snapshot.docs.map((doc) => {
                 user.loginUser.data = doc.data()
+                user.loginUser.data.id = doc.id
                 
             });
         });
@@ -63,7 +71,7 @@ const reducer = (state = user, action) => {
 
     if(action.type === "searchUser"){
         user.searchUserName = action.userName
-        console.log(action.userEmail);
+        
 
         const getUserData = () => {
             const getData = query(dataRef, where("user_name", "==",  user.searchUserName));
@@ -71,13 +79,14 @@ const reducer = (state = user, action) => {
             onSnapshot(getData, (snapshot) => {
                 snapshot.docs.map((doc) => {
                     //user.searchUser.data = doc.data();
+                    user.searchUser.data.id = doc.id
                     user.searchUser.data.email = doc.data().email;
                     user.searchUser.data.user_name = doc.data().user_name;
                     user.searchUser.data.following = doc.data().following;
                     user.searchUser.data.followers = doc.data().followers;
                 })
             }); 
-            console.log(user.searchUser.data.email);
+            
             return user.searchUser.data.email;
         }
         const getImages = () => {
@@ -95,13 +104,42 @@ const reducer = (state = user, action) => {
                        
                     });
                 })
-                console.log(user);
+              
                 user.searchUser.images = imgData;
 
             })
         }
         getUserData();
         getImages();
+    }
+    if(action.type === "follow"){
+
+  
+        const loginUserDocument = doc(db, "users", user.loginUser.data.id);  
+        const loginNewDocument = { following: arrayUnion(user.searchUser.data.user_name)};
+        
+       
+        const searchUserDocument = doc(db, "users", user.searchUser.data.id);
+        const searchNewDocument = { followers: arrayUnion(user.loginUser.data.user_name)}
+
+        updateDoc(loginUserDocument, loginNewDocument);
+        updateDoc(searchUserDocument, searchNewDocument);
+        alert("follow from reducer");
+    }
+    if(action.type === "unfollow"){
+        alert("unfollow from reducer");
+    }
+    if(action.type === "deleteImage"){
+        const storage = getStorage();
+        console.log(user.loginUser.data.email);
+        console.log(action.deleteImgUrl);
+        const imgRef = ref(storage, user.loginUser.data.email + "/" + action.deleteImgUrl)
+        
+        deleteObject(imgRef).then(() => {
+           alert("Uspesno")
+          }).catch((error) => {
+            alert("Error")
+          });
     }
 
     return state;

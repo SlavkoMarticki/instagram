@@ -23,8 +23,8 @@ export default function UserMainInfo(props){
                 </div>
                 <div className="post-followers-numbers">
                     <p>{images?.length}</p>
-                    <p>{following?.length}</p>
                     <p>{followers?.length}</p>
+                    <p>{following?.length}</p>
                 </div>
            </div>
         </div>
