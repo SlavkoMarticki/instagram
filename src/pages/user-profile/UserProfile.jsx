@@ -15,24 +15,9 @@ import UserPicture from "./components/user-pictures/UserPicture";
 
 export default function UserProfile(){
     
-    //const [imagerUrl, setImageUrl] = useState([]);
-    //const userCollectionData = collection(db, "users");
-    //const imageRef = ref(storage, "/");
-    //const [state, setState] = useState({});
+
     const getCuresntState = store.getState();
-
-
-    // useEffect(() => {
-    //     // listAll(imageRef).then((res) => {
-    //     //     res.items.forEach((item) => {
-    //     //         getDownloadURL(item).then((url) => {
-    //     //             setImageUrl((prev) => [...prev, url]);
-    //     //         })
-    //     //     })
-    //     // });
-       
-    // }, [])
-
+    
     return(
         <>
             <UserProfileHeader 
@@ -46,7 +31,7 @@ export default function UserProfile(){
                 images = {getCuresntState.loginUser.images}
             />
             <UserPicture 
-                urls={getCuresntState.loginUser.images}
+                images={getCuresntState.loginUser.images}
             />
             
             <Footer />

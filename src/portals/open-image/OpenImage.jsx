@@ -6,13 +6,12 @@ import store from "../../store/store";
 
 export default function OpenImage(props) {
     
-    const {click, url} = props;
+    const {click, url, name} = props;
 
-    const deleteImg = (imgUrl) => {
-        console.log(imgUrl);
+    const deleteImg = (imgName) => {
         store.dispatch({
             type: "deleteImage",
-            deleteImgUrl: imgUrl
+            name: imgName
         })
     }
 
@@ -28,7 +27,7 @@ export default function OpenImage(props) {
            </div>
            <div className="clicked-image-button" >
                
-                <button onClick={() => {deleteImg(url)}}>Delete Image</button>
+                <button onClick={() => {deleteImg(name)}}>Delete Image</button>
            </div>
         </div>
     , document.getElementById("openImage") );

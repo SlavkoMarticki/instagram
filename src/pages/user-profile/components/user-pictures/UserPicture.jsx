@@ -6,20 +6,22 @@ import { useState } from "react";
 
 export default function UserPicture(props){
 
-    const {urls} = props;
+    const {images} = props;
     const [click, setClick] = useState(false);
     const [clickedImage, setClickedImage] = useState("");
+    const [clickedImgName, setClickedImgName] = useState("");
 
-    
+   
     return (
         <div className="user-picture-container">
-            {urls?.map((url) => {
+            {images?.map((image) => {
                return <img 
-                    src={url} 
+                    src={image.imgUrl} 
                     alt="Loading..." 
                     className="user-picture"
                     onClick={() => { 
-                        setClickedImage(url)
+                        setClickedImage(image.imgUrl)
+                        setClickedImgName(image.imgName)
                         setClick(true) 
                     }}
                 />
@@ -29,6 +31,7 @@ export default function UserPicture(props){
                 <OpenImage 
                     click={setClick}
                     url={clickedImage}
+                    name={clickedImgName}
                 />
                  : <></>}
         </div>

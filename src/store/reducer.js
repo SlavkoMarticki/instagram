@@ -58,8 +58,15 @@ const reducer = (state = user, action) => {
         listAll(imageRef).then((res) => {
             res.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {
-                  
-                   imgData.push(url);
+                    const imgLocation = item._location.path_
+                    const subName = imgLocation.substring(imgLocation.indexOf("/")+1, imgLocation.length);
+                    imgData.push(
+                        {
+                            imgUrl: url,
+                            imgName: subName
+                        }
+                    );
+                    
                    
                 })
             })
@@ -98,6 +105,7 @@ const reducer = (state = user, action) => {
             listAll(imageRef).then((res) => {
             
                 res.items.forEach((item) => {
+                    
                     getDownloadURL(item).then((url) => {
                       
                        imgData.push(url);
@@ -130,16 +138,14 @@ const reducer = (state = user, action) => {
         alert("unfollow from reducer");
     }
     if(action.type === "deleteImage"){
-        const storage = getStorage();
-        console.log(user.loginUser.data.email);
-        console.log(action.deleteImgUrl);
-        const imgRef = ref(storage, user.loginUser.data.email + "/" + action.deleteImgUrl)
+
+        const imgRef = ref(storage, user.loginUser.data.email + "/" + action.name)
         
         deleteObject(imgRef).then(() => {
            alert("Uspesno")
-          }).catch((error) => {
-            alert("Error")
-          });
+        }).catch((error) => {
+            alert("Oops! Something is wrong")
+        });
     }
 
     return state;
