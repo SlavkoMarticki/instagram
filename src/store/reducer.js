@@ -21,9 +21,14 @@ import {
 const user = {
     loginUser: {
         data: {
-            id: ""
+            id: "",
+            email: "",
+            followers: [],
+            following: [],
+            user_name: ""
         },
-        images: {}
+        images: {},
+        followingUsersImages: []
     },
     searchUser: {
         data: {
@@ -48,9 +53,12 @@ const reducer = (state = user, action) => {
         const imgData = []
   
         onSnapshot(q, (snapshot) => {
-           
             snapshot.docs.map((doc) => {
-                user.loginUser.data = doc.data()
+                
+                user.loginUser.data.email = doc.data().email;
+                user.loginUser.data.followers = doc.data().followers;
+                user.loginUser.data.following = doc.data().following;
+                user.loginUser.data.user_name = doc.data().user_name;
                 user.loginUser.data.id = doc.id
                 
             });
@@ -85,7 +93,6 @@ const reducer = (state = user, action) => {
 
             onSnapshot(getData, (snapshot) => {
                 snapshot.docs.map((doc) => {
-                    //user.searchUser.data = doc.data();
                     user.searchUser.data.id = doc.id
                     user.searchUser.data.email = doc.data().email;
                     user.searchUser.data.user_name = doc.data().user_name;
@@ -158,6 +165,45 @@ const reducer = (state = user, action) => {
         }).catch((error) => {
             alert("Oops! Something is wrong")
         });
+    }
+    if(action.type === "getAllFollowersImages"){
+ 
+        const userNames = user.loginUser.data.following;
+        
+
+        async function getEmails(){
+            userNames.forEach(userName => { 
+            const getData = query(dataRef, where("user_name", "==",  userName));
+            onSnapshot(getData, (snapshot) => {
+                snapshot.docs.map((doc) => {
+                    console.log(doc.data().email);
+                    return doc.data().email
+                })
+            }); 
+        });}
+        
+        async function getUrls(){
+            const emails = await getEmails();
+            console.log(emails);
+            emails?.forEach(email => {
+            console.log(email);
+            const imageRef = ref(storage, email);
+            listAll(imageRef).then((res) => {
+                res.items.forEach((item) => {
+                    
+                    getDownloadURL(item).then((url) => {
+                       user.loginUser.followingUsersImages.push(url);
+                       
+                    });
+                })
+            })
+           
+        });
+        console.log(user.loginUser.followingUsersImages);
+        }
+        getUrls();
+        
+       
     }
 
     return state;

@@ -15,16 +15,19 @@ export default function LoginStructure(){
     const [password, setPassword] = useState("");
     const [click, setClick] = useState(false);
 
-    const login = async () => {
+    const login = () => {
         try {
            
-            const user = await signInWithEmailAndPassword(auth, email, password);
+            const user =  signInWithEmailAndPassword(auth, email, password);
             console.log("uspesno");
             store.dispatch({
                 type: "getUser",
                 email: email 
             })
-            navigate("/home");
+            setTimeout(() => {
+                navigate("/home");
+            }, 1000);
+           
         } catch (error) {
             console.log(error.message);
         }
