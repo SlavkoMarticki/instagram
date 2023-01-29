@@ -19,5 +19,15 @@
     display: inline-block;
     width: 50%;
     margin: 15px 0px 0px 0px;
-   
 }
+.background-color .clicked-image-button button{
+    background-color: blue;
+    font-weight: bold;
+    color: white;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    width: 140px;
+    cursor: pointer;
+}
+

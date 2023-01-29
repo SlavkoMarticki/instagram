@@ -103,13 +103,10 @@ const reducer = (state = user, action) => {
             const imgData = [];
             
             listAll(imageRef).then((res) => {
-            
                 res.items.forEach((item) => {
                     
                     getDownloadURL(item).then((url) => {
-                      
                        imgData.push(url);
-                       
                     });
                 })
               
@@ -135,7 +132,22 @@ const reducer = (state = user, action) => {
         alert("follow from reducer");
     }
     if(action.type === "unfollow"){
-        alert("unfollow from reducer");
+     
+        const loginUserDocument = doc(db, "users", user.loginUser.data.id);  
+        const loginUserFollowing = user.loginUser.data.following;
+        const newLoginUserFollowing = loginUserFollowing.filter((e) => {return e !== user.searchUser.data.user_name})
+        const loginNewDocument = { following: newLoginUserFollowing};
+        updateDoc(loginUserDocument, loginNewDocument);
+        
+       
+        const searchUserDocument = doc(db, "users", user.searchUser.data.id);
+        const searchUserFollowers = user.searchUser.data.following;
+        const newSearchUserFollowers = searchUserFollowers.filter((e) => {return e !== user.loginUser.data.user_name});
+        const searchNewDocument = { followers: newSearchUserFollowers}
+        updateDoc(searchUserDocument,searchNewDocument);
+
+        alert("Unfollow from reducer");
+
     }
     if(action.type === "deleteImage"){
 
