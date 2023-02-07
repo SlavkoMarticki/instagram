@@ -168,40 +168,48 @@ const reducer = (state = user, action) => {
     }
     if(action.type === "getAllFollowersImages"){
  
-        const userNames = user.loginUser.data.following;
         
+      
 
-        async function getEmails(){
+         const getEmails = async () => {
+            let emails = [];
+            const userNames = user.loginUser.data.following;
             userNames.forEach(userName => { 
-            const getData = query(dataRef, where("user_name", "==",  userName));
-            onSnapshot(getData, (snapshot) => {
-                snapshot.docs.map((doc) => {
-                    console.log(doc.data().email);
-                    return doc.data().email
-                })
-            }); 
-        });}
+                const getData = query(dataRef, where("user_name", "==",  userName));
+                onSnapshot(getData, (snapshot) => {
+                    snapshot.docs.map((doc) => {
+                        emails.push(doc.data().email);
+                    })
+                }); 
+            });
+            console.log(emails);
+            return emails;
+        }
         
-        async function getUrls(){
+        const getUrls = async () => {
             const emails = await getEmails();
             console.log(emails);
-            emails?.forEach(email => {
-            console.log(email);
-            const imageRef = ref(storage, email);
-            listAll(imageRef).then((res) => {
-                res.items.forEach((item) => {
-                    
-                    getDownloadURL(item).then((url) => {
-                       user.loginUser.followingUsersImages.push(url);
-                       
-                    });
-                })
-            })
+            for (let i = 0; i < emails.length; i++) {
+               console.log(emails[i]);
+                
+            }
+            // emails.forEach(email => {
+            //     console.log(email);
+            //     const imageRef = ref(storage, email);
+            //     listAll(imageRef).then((res) => {
+            //         res.items.forEach((item) => { 
+            //                 getDownloadURL(item).then((url) => {
+            //                     user.loginUser.followingUsersImages.push(url);
+            //                     console.log(user.loginUser.followingUsersImages);
+            //             });
+            //         })
+            //     })
            
-        });
-        console.log(user.loginUser.followingUsersImages);
+            // });
+            
         }
         getUrls();
+        
         
        
     }

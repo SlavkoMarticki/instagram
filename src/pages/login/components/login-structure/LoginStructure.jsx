@@ -26,7 +26,7 @@ export default function LoginStructure(){
             })
             setTimeout(() => {
                 navigate("/home");
-            }, 1000);
+            }, 2000);
            
         } catch (error) {
             console.log(error.message);
