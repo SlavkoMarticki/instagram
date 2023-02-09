@@ -8,17 +8,17 @@ import { auth } from "../../../../firebase/firebase-config";
 import { useNavigate } from "react-router-dom";
 import store from "../../../../store/store";
 
-
+//ubaci formu
 export default function LoginStructure(){
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    //izbaci click
     const [click, setClick] = useState(false);
 
     const login = () => {
         try {
            
-            const user =  signInWithEmailAndPassword(auth, email, password);
             console.log("uspesno");
             store.dispatch({
                 type: "getUser",
@@ -32,6 +32,7 @@ export default function LoginStructure(){
             console.log(error.message);
         }
     }
+    //izbaci click
 
     if(click){
         setClick(false);

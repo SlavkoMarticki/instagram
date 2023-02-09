@@ -73,9 +73,7 @@ const reducer = (state = user, action) => {
                             imgUrl: url,
                             imgName: subName
                         }
-                    );
-                    
-                   
+                    );   
                 })
             })
             //console.log(imgData);
@@ -136,7 +134,7 @@ const reducer = (state = user, action) => {
 
         updateDoc(loginUserDocument, loginNewDocument);
         updateDoc(searchUserDocument, searchNewDocument);
-        alert("follow from reducer");
+        
     }
     if(action.type === "unfollow"){
      
@@ -153,7 +151,7 @@ const reducer = (state = user, action) => {
         const searchNewDocument = { followers: newSearchUserFollowers}
         updateDoc(searchUserDocument,searchNewDocument);
 
-        alert("Unfollow from reducer");
+        
 
     }
     if(action.type === "deleteImage"){
@@ -166,33 +164,44 @@ const reducer = (state = user, action) => {
             alert("Oops! Something is wrong")
         });
     }
-    if(action.type === "getAllFollowersImages"){
- 
-        
-      
 
-         const getEmails = async () => {
-            let emails = [];
+    if(action.type === "getAllFollowersImages"){   
+
+        const getEmails = () => {
+            
+            const emails = [];    
             const userNames = user.loginUser.data.following;
-            userNames.forEach(userName => { 
+
+
+            const mappedData = userNames.forEach((userName) => { 
+                const test = [];
                 const getData = query(dataRef, where("user_name", "==",  userName));
-                onSnapshot(getData, (snapshot) => {
+                console.log(getData);
+                onSnapshot(getData,  (snapshot) => {
+  
+                    // snapshot.docChanges().forEach((change) => {
+                    //     emails.push(change.doc.data().email);
+                    // })
                     snapshot.docs.map((doc) => {
-                        emails.push(doc.data().email);
-                    })
+                        test.push(doc.data().email);
+                    });
                 }); 
-            });
-            console.log(emails);
-            return emails;
-        }
-        
-        const getUrls = async () => {
-            const emails = await getEmails();
-            console.log(emails);
-            for (let i = 0; i < emails.length; i++) {
-               console.log(emails[i]);
+
+                return test;
                 
-            }
+            });
+            console.log(mappedData);
+           // console.log(userNames);
+            //console.log([...emails]);
+            return emails
+        }
+        console.log( getEmails());
+        const getFollowersImagesUrls = () => {
+            const emails = getEmails();
+            console.log(Object.values( emails));
+        
+            
+            
             // emails.forEach(email => {
             //     console.log(email);
             //     const imageRef = ref(storage, email);
@@ -208,7 +217,8 @@ const reducer = (state = user, action) => {
             // });
             
         }
-        getUrls();
+        
+        getFollowersImagesUrls();
         
         
        

@@ -11,8 +11,9 @@ export default function UserProfileHeader(props){
 
     return (
         <div className="user-profile-header">
+            {/**back button react */}
             <p className="user-name">{name}</p>
-         {  addImage != true ? <button 
+         {  !addImage ? <button 
                 className="add-image-button"
                 onClick={() => {navigate("/addimage")}}
                 >

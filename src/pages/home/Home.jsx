@@ -8,22 +8,26 @@ import store from "../../store/store";
 
 
 export default function Home(){
-
-    useEffect(() => {
-        const emails = store.getState();
-        store.dispatch({
-            type: "getAllFollowersImages"
-        })
-        const images = store.getState();
-        console.log(images.loginUser);
-    },[]);
-   
-
+    store.dispatch({
+        type: "getAllFollowersImages"
+    })
+    const data = store.getState();
+    const images = data.loginUser.images;
+    //napravi home layout u layout folderu i u njega stavi header i footer i to sve vrepaj u ovoj home komponenti
+    /**
+     * ovako bi trebalo da izlgeda
+     * <HomeLayout>
+     *  {childern}
+     * <HomeLayout/>
+     */
     return (
         <>
             <Header />
             <Story />
-            <PostedImage />
+            {/**promeni naizv */}
+            <PostedImage 
+               images = {images}
+            />
             <Footer />
         </>
        

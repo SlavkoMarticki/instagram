@@ -20,6 +20,7 @@ export default function App(){
                 <Route path="/" element={<Login />} />
                 <Route path="/create-account" element={<CreateAccount />} />
                 <Route path="/home" element={<Home />} />
+                {/** promeni naziv ruta */}
                 <Route path="/userprofile" element={<UserProfile />} />
                 <Route path="/addimage" element={<AddImage />} />
                 <Route path="/search" element={<Search />} />

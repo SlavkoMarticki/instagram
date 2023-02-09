@@ -7,6 +7,10 @@ import arrow from "../../../../common/images/arrow.png";
 
 
 export default function PostedImage(props){
+    const {images} = props;
+    
+    console.log(images[0]);
+
     return (
         <div className="postedImage-container">
             <div className="post-holder">
@@ -24,7 +28,7 @@ export default function PostedImage(props){
                   
                 </header>
                 <div className="post-image">
-                    <img src={img} alt="Loading..." />
+                    <img src={images[0]?.imgUrl} alt="Loading..." />
                 </div>
                 <footer className="post-footer">
                     <button>
