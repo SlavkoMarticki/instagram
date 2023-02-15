@@ -10,6 +10,7 @@ export default function UserMainInfo(props){
         images
     } = props;
 
+    console.log(images);
     return (
         <div className="user-main-info-container">
            <div className="user-image">

@@ -5,30 +5,51 @@ import React, {
 import Footer  from "../../common/footer/Footer";
 import UserProfileHeader from "./components/user-profile-header/UserProfileHeader";
 import UserMainInfo from "./components/user-main-info/UserMainInfo";
-import store from "../../store/store";
+
 import UserPicture from "./components/user-pictures/UserPicture";
 
 
 
 export default function UserProfile(){
-    
 
-    const getCurentState = store.getState();
-    
+    const [data, setData] = useState({
+        email : "",
+        user_name: "",
+        followers: [],
+        following: [],
+        images: []
+    });
+    useEffect(() => {
+        const getData = localStorage.getItem("loginUser");
+        const getImages = localStorage.getItem("loginUserImages");
+        const userData = JSON.parse(getData);
+        const getImagesData = JSON.parse(getImages);
+        
+
+        setData({
+            email: userData.data.email,
+            user_name: userData.data.user_name,
+            followers: userData.data.followers,
+            following: userData.data.following,
+            images: [getImagesData]
+        });
+    },[])
+
+  
     return(
         <>
             <UserProfileHeader 
                 name = {
-                    getCurentState.loginUser.data.user_name
+                    data.user_name
                 }    
              />
             <UserMainInfo 
-                followers = {getCurentState.loginUser.data.followers}
-                following = {getCurentState.loginUser.data.following}
-                images = {getCurentState.loginUser.images}
+                followers = {data.followers}
+                following = {data.following}
+                images = {data?.images}
             />
             <UserPicture 
-                images={getCurentState.loginUser.images}
+                images={data?.images}
             />
             
             <Footer />

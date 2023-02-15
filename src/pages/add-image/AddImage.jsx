@@ -13,14 +13,12 @@ export default function AddImage(){
 
     const uploadImage = () => {
         if(image == null) return;
-        console.log(state.loginUser);
-        const imageRef = ref(storage, state.loginUser.data.email +"/"+ image.name);
+        const data = localStorage.getItem("loginUser");
+        const loginUserEmail = JSON.parse(data);
+        const imageRef = ref(storage, loginUserEmail.data.email +"/"+ image.name);
         uploadBytes(imageRef, image).then(() => {
             alert ("Image Uploaded");
-            navigate("/home");
-            store.dispatch({
-                type: "getUser"
-            });
+            navigate("/userprofile");
         })
     }
 

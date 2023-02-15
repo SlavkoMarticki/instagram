@@ -9,27 +9,35 @@ import arrow from "../../../../common/images/arrow.png";
 export default function PostedImage(props){
     const {images} = props;
     
-    console.log(images[0]);
+    console.log(images);
 
     return (
         <div className="postedImage-container">
             <div className="post-holder">
-                <header className="post-header">
-                    <div className="user-image">
-                        <img 
-                            src={img} 
-                            alt="Loading..." 
-                            className="user-image"
-                        />
+                {
+                    images.map((img) => {
+                       return <>
+                            <header className="post-header">
+                        <div className="user-image">
+                            <img 
+                                src={img.imgUrl} 
+                                alt="Loading..." 
+                                className="user-image"
+                            />
+                        </div>
+                        <div className="user-name">
+                            <p>user_nfdffdfame</p>
+                        </div>
+                      
+                    </header>
+                    <div className="post-image">
+                        <img src={img.imgUrl} alt="Loading..." />
                     </div>
-                    <div className="user-name">
-                        <p>user_name</p>
-                    </div>
-                  
-                </header>
-                <div className="post-image">
-                    <img src={images[0]?.imgUrl} alt="Loading..." />
-                </div>
+                        </>
+                    
+                    })
+                }
+              
                 <footer className="post-footer">
                     <button>
                         <img src={heart} alt="Loading..." />

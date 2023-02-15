@@ -8,6 +8,13 @@ export default function OpenImage(props) {
     
     const {click, url, name} = props;
 
+    const setProfileImg = (imgName) => {
+        store.dispatch({
+            type: "setProfileImg",
+            name: imgName
+        });
+    }
+
     const deleteImg = (imgName) => {
         store.dispatch({
             type: "deleteImage",
@@ -23,7 +30,7 @@ export default function OpenImage(props) {
                 alt="Loading..." 
             />
            <div className="clicked-image-button">
-                <button>Set as profile image</button>
+                <button onClick={() => {setProfileImg(url)}}>Set as profile image</button>
            </div>
            <div className="clicked-image-button" >
                

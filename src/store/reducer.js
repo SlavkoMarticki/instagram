@@ -59,7 +59,11 @@ const reducer = (state = user, action) => {
                 user.loginUser.data.followers = doc.data().followers;
                 user.loginUser.data.following = doc.data().following;
                 user.loginUser.data.user_name = doc.data().user_name;
-                user.loginUser.data.id = doc.id
+                user.loginUser.data.id = doc.id;
+                
+                localStorage.setItem("loginUser", JSON.stringify(user.loginUser));
+                const data = localStorage.getItem("loginUser")
+                console.log(JSON.parse(data));
                 
             });
         });
@@ -68,17 +72,24 @@ const reducer = (state = user, action) => {
                 getDownloadURL(item).then((url) => {
                     const imgLocation = item._location.path_
                     const subName = imgLocation.substring(imgLocation.indexOf("/")+1, imgLocation.length);
-                    imgData.push(
-                        {
-                            imgUrl: url,
-                            imgName: subName
-                        }
-                    );   
+                    const data = {
+                        imgUrl: url,
+                        imgName: subName
+                    }
+                    
+                    imgData.push(data);
+                    
                 })
             })
-            //console.log(imgData);
+           
+            
             user.loginUser.images = imgData;
+            console.log(user.loginUser.images);
+        localStorage.setItem("loginUserImages", JSON.stringify({data: user.loginUser.images}));
+
         })
+        
+
         
     }
 
@@ -176,7 +187,7 @@ const reducer = (state = user, action) => {
             const mappedData = userNames.forEach((userName) => { 
                 const test = [];
                 const getData = query(dataRef, where("user_name", "==",  userName));
-                console.log(getData);
+
                 onSnapshot(getData,  (snapshot) => {
   
                     // snapshot.docChanges().forEach((change) => {
@@ -190,15 +201,14 @@ const reducer = (state = user, action) => {
                 return test;
                 
             });
-            console.log(mappedData);
            // console.log(userNames);
             //console.log([...emails]);
             return emails
         }
-        console.log( getEmails());
+       
         const getFollowersImagesUrls = () => {
             const emails = getEmails();
-            console.log(Object.values( emails));
+            
         
             
             
@@ -222,6 +232,10 @@ const reducer = (state = user, action) => {
         
         
        
+    }
+
+    if(action.type === "setProfileImg"){
+        alert(action.name);
     }
 
     return state;
