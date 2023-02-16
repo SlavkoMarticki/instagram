@@ -1,10 +1,10 @@
 import React from "react";
-import "./userPicture.css";
+import "../../../user-profile/components/user-pictures/userPicture.css"
 import OpenImage from "../../../../portals/open-image/OpenImage";
 import { useState } from "react";
 
 
-export default function UserPicture(props){
+export default function UserImages(props){
 
     const {images} = props;
     const [click, setClick] = useState(false);
@@ -16,11 +16,11 @@ export default function UserPicture(props){
         <div className="user-picture-container">
             {images?.map((image) => {
                return <img 
-                    src={image.imgUrl} 
+                    src={image} 
                     alt="Loading..." 
                     className="user-picture"
                     onClick={() => { 
-                        setClickedImage(image.imgUrl)
+                        setClickedImage(image)
                         setClickedImgName(image.imgName)
                         setClick(true) 
                     }}
@@ -30,7 +30,7 @@ export default function UserPicture(props){
             {click != false ? 
                 <OpenImage 
                     click={setClick}
-                    url={clickedImage}
+                    url={clickedImgName}
                     name={clickedImgName}
                 />
                  : <></>}

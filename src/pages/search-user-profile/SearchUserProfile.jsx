@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserMainInfo from "../user-profile/components/user-main-info/UserMainInfo";
-import UserPicture  from "../user-profile/components/user-pictures/UserPicture";
+import UserImages  from "../search-user-profile/components/user-images/UserImages.jsx";
 import UserProfileHeader from "../user-profile/components/user-profile-header/UserProfileHeader";
 import FollowUnffolowButton from "./components/follow-unffolow/FollowUnffolowButton";
 import store from "../../store/store";
@@ -44,8 +44,8 @@ export default function SearchUserProfile(){
                 
             />
             <FollowUnffolowButton />
-            <UserPicture 
-                urls={userData.images}
+            <UserImages 
+                images={userData.images}
             />
         </>
     );
