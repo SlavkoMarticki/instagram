@@ -15,40 +15,40 @@ export default function PostedImage(props){
         <div className="postedImage-container">
             <div className="post-holder">
                 {
-                    images.map((img) => {
-                       return <>
-                            <header className="post-header">
-                        <div className="user-image">
-                            <img 
-                                src={img.imgUrl} 
-                                alt="Loading..." 
-                                className="user-image"
-                            />
-                        </div>
-                        <div className="user-name">
-                            <p>user_nfdffdfame</p>
-                        </div>
-                      
-                    </header>
-                    <div className="post-image">
-                        <img src={img.imgUrl} alt="Loading..." />
-                    </div>
-                        </>
-                    
+                    images?.map((img) => {
+                       return (
+                         <>
+                           <header className="post-header">
+                             <div className="user-image">
+                               <img
+                                 src={img.imgUrl}
+                                 alt="Loading..."
+                                 className="user-image"
+                               />
+                             </div>
+                             <div className="user-name">
+                               <p>user_nfdffdfame</p>
+                             </div>
+                           </header>
+                           <div className="post-image">
+                             <img src={img.imgUrl} alt="Loading..." />
+                           </div>
+                           <footer className="post-footer">
+                             <button>
+                               <img src={heart} alt="Loading..." />
+                             </button>
+                             <button>
+                               <img src={comment} alt="Loading..." />
+                             </button>
+                             <button>
+                               <img src={arrow} alt="Loading..." />
+                             </button>
+                           </footer>
+                         </>
+                       );
                     })
                 }
-              
-                <footer className="post-footer">
-                    <button>
-                        <img src={heart} alt="Loading..." />
-                    </button>
-                    <button>
-                        <img src={comment} alt="Loading..." />
-                    </button>
-                    <button>
-                        <img src={arrow} alt="Loading..." />
-                    </button>
-                </footer>
+
             </div>
             
            

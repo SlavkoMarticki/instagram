@@ -7,14 +7,15 @@ export default function UserMainInfo(props){
     const {
         following, 
         followers,
-        images
+        images,
+        profileImg
     } = props;
 
-    console.log(images);
+    console.log(profileImg);
     return (
         <div className="user-main-info-container">
            <div className="user-image">
-                <img src={img} alt="Loading..." />
+                <img src={profileImg} alt="Loading..." />
            </div>
            <div className="posts-followers">
                 <div className="post-followers-names">

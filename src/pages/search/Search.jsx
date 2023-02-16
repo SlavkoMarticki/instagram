@@ -12,32 +12,28 @@ import {
     collection,
     onSnapshot
 } from "firebase/firestore";
-import {
-    ref,
-    listAll,
-    getDownloadURL
-} from "firebase/storage";
+
 
 export default function Search(){
     const navigate = useNavigate();
     const [userInput, setUserInput] = useState("");
-    const [userEmail, setUserEmail] = useState("");
     const [user, setUser] = useState([]);
-    //const user = []
+    
     const ref = collection(db, "users");
 
     const searchUser = () => {
-        console.log(userInput);
+        
         const q = query(ref, where("user_name", "==", userInput));
         onSnapshot(q, (snapshot) => {
             snapshot.docs.map((doc) => {
+                localStorage.setItem("searchUserData", JSON.stringify({...doc.data()}));
                 setUser([{...doc.data()}]);   
             })
         });
     }
     
     const seeSearchUserData = (user_name, email) => {
-        
+        console.log(email);
         store.dispatch({
             type: "searchUser",
             userName: user_name,
@@ -66,8 +62,8 @@ export default function Search(){
                         <img src={arrow} alt="Loading..." />
                     </button>
                 </div>
-                
             </div>
+
             <div className="search-result">
                 {user.map((e) => {
                        

@@ -11,7 +11,6 @@ export default function UserPicture(props){
     const [clickedImage, setClickedImage] = useState("");
     const [clickedImgName, setClickedImgName] = useState("");
 
-   
     return (
         <div className="user-picture-container">
             {images?.map((image) => {

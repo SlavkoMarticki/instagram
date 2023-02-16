@@ -3,8 +3,6 @@ import Button from "../../../../common/buttons/Button";
 import Input from "../../../../common/inputs/Input";
 import CopyRight from "../../../../common/copy-right/CopyRight";
 import "./loginStructure.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../../firebase/firebase-config";
 import { useNavigate } from "react-router-dom";
 import store from "../../../../store/store";
 
@@ -19,7 +17,6 @@ export default function LoginStructure(){
     const login = () => {
         try {
            
-            console.log("uspesno");
             store.dispatch({
                 type: "getUser",
                 email: email 

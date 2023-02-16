@@ -62,8 +62,6 @@ const reducer = (state = user, action) => {
                 user.loginUser.data.id = doc.id;
                 
                 localStorage.setItem("loginUser", JSON.stringify(user.loginUser));
-                const data = localStorage.getItem("loginUser")
-                console.log(JSON.parse(data));
                 
             });
         });
@@ -76,62 +74,34 @@ const reducer = (state = user, action) => {
                         imgUrl: url,
                         imgName: subName
                     }
-                    
                     imgData.push(data);
+                    localStorage.setItem("loginUserImages", JSON.stringify(imgData));
+                    
                     
                 })
             })
-           
-            
-            user.loginUser.images = imgData;
-            console.log(user.loginUser.images);
-        localStorage.setItem("loginUserImages", JSON.stringify({data: user.loginUser.images}));
-
-        })
-        
-
-        
+        })    
     }
 
     if(action.type === "searchUser"){
-        user.searchUserName = action.userName
-        
-
-        const getUserData = () => {
-            const getData = query(dataRef, where("user_name", "==",  user.searchUserName));
-
-            onSnapshot(getData, (snapshot) => {
-                snapshot.docs.map((doc) => {
-                    user.searchUser.data.id = doc.id
-                    user.searchUser.data.email = doc.data().email;
-                    user.searchUser.data.user_name = doc.data().user_name;
-                    user.searchUser.data.following = doc.data().following;
-                    user.searchUser.data.followers = doc.data().followers;
-                })
-            }); 
-            
-            return user.searchUser.data.email;
-        }
-        const getImages = () => {
-            
            
-            const imageRef = ref(storage, action.userEmail);
-            const imgData = [];
-            
-            listAll(imageRef).then((res) => {
-                res.items.forEach((item) => {
-                    
-                    getDownloadURL(item).then((url) => {
-                       imgData.push(url);
-                    });
-                })
-              
-                user.searchUser.images = imgData;
-
-            })
-        }
-        getUserData();
-        getImages();
+        
+        const imageRef = ref(storage, action.userEmail);
+        const data = [];
+           
+        listAll(imageRef).then((res) => {
+            console.log(res);
+            res.items.forEach((item) => {
+                
+                getDownloadURL(item).then((url) => {
+                    data.push(url)
+                   localStorage.setItem("searchUserImages", JSON.stringify(data))
+                });
+            });
+        })
+        
+        
+        
     }
     if(action.type === "follow"){
 

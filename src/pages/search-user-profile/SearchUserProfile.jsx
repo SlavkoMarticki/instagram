@@ -16,12 +16,17 @@ export default function SearchUserProfile(){
 
     useEffect(()=>{
         const userData = store.getState();
-        console.log(userData);
+        const data = localStorage.getItem("searchUserData");
+        const imgData = localStorage.getItem("searchUserImages")
+        const searchUserdata = JSON.parse(data);
+        const searchUserImages = JSON.parse(imgData);
+        console.log(searchUserImages);
+        
         setUserData({
-            user_name : userData.searchUser.data.user_name,
-            following : userData.searchUser.data.following,
-            followers : userData.searchUser.data.followers,  
-            images : userData.searchUser.images
+            user_name : searchUserdata.user_name,
+            following : searchUserdata.following,
+            followers : searchUserdata.followers,  
+            images : searchUserImages
         })
     },[])
 

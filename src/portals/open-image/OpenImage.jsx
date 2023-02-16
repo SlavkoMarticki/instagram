@@ -8,11 +8,8 @@ export default function OpenImage(props) {
     
     const {click, url, name} = props;
 
-    const setProfileImg = (imgName) => {
-        store.dispatch({
-            type: "setProfileImg",
-            name: imgName
-        });
+    const setProfileImg = (imgUrl) => {
+        localStorage.setItem("loginUserProfileImage", JSON.stringify(imgUrl))
     }
 
     const deleteImg = (imgName) => {

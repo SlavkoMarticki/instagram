@@ -11,8 +11,8 @@ export default function Home(){
     store.dispatch({
         type: "getAllFollowersImages"
     })
-    const data = store.getState();
-    const images = data.loginUser.images;
+    const data = localStorage.getItem("loginUserImages");
+    const images = JSON.parse(data);
     //napravi home layout u layout folderu i u njega stavi header i footer i to sve vrepaj u ovoj home komponenti
     /**
      * ovako bi trebalo da izlgeda
